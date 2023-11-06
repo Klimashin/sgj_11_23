@@ -82,3 +82,5 @@ public record ShowNegativeTagEvent : IDispatcherEvent
         this.tag = tag;
     }
 }
+
+public record PlayCollectSfxEvent : IDispatcherEvent;

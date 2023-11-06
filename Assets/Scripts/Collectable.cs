@@ -16,6 +16,11 @@ public class Collectable : MonoBehaviour
     public void Collect()
     {
         Collider2D.enabled = false;
+
+        if (scoreType != ScoreType.Negative)
+        {
+            GameController.Instance.eventsDispatcher.Dispatch(new PlayCollectSfxEvent());
+        }
         
         transform
             .DOScale(Vector3.zero, SCALE_DURATION)

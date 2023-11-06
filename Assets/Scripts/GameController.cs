@@ -22,10 +22,16 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
     [SerializeField] private Button startGameButton;
     [SerializeField] private CanvasGroup startGameAnimation;
     [SerializeField] private CanvasGroup endGameAnimation;
+    [SerializeField] private AudioClip collectSfx;
+    [SerializeField] private float pitchCooldown = 0.4f;
+    [SerializeField] private float pitchStep = 0.2f;
+    [SerializeField] private float maxPitch = 2f;
 
     private int _currentPointIndex;
     private bool _gameplayStarted;
     private float _endGameCountdown = 2f;
+    private float _pitchCooldown = 0.2f;
+    private float _currentPitch = 1f;
 
     public static GameController Instance { get; private set; }
 
@@ -89,14 +95,30 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
         GenerateInitialCards();
         
         eventsDispatcher.Register<CardApplyEvent>(this, OnCardApplied);
-        eventsDispatcher.Register<AddScoreEvent>(this, OnAddScore);
+        eventsDispatcher.Register<PlayCollectSfxEvent>(this, OnPlayCollectSfxEvent);
 
         _gameplayStarted = true;
     }
 
-    private void OnAddScore(AddScoreEvent obj)
+    private void OnPlayCollectSfxEvent(PlayCollectSfxEvent e)
     {
-        throw new NotImplementedException();
+        if (_pitchCooldown <= 0f)
+        {
+            _currentPitch = 1f;
+        }
+        else
+        {
+            _currentPitch += pitchStep;
+        }
+
+        if (_currentPitch > maxPitch)
+        {
+            _currentPitch = maxPitch;
+        }
+        
+        _pitchCooldown = pitchCooldown;
+        
+        soundSystem.PlayOneShot(collectSfx, _currentPitch);
     }
 
     private void OnCardApplied(CardApplyEvent cardApplyEvent)
@@ -121,6 +143,8 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
 
     private void Update()
     {
+        _pitchCooldown -= Time.deltaTime;
+        
         if (!_gameplayStarted)
         {
             return;
@@ -202,5 +226,6 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
     private void OnDestroy()
     {
         eventsDispatcher.Unregister<CardApplyEvent>(this);
+        eventsDispatcher.Unregister<PlayCollectSfxEvent>(this);
     }
 }

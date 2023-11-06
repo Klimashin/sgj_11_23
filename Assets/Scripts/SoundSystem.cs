@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -43,16 +44,19 @@ public class SoundSystem : ScriptableObject
             });
     }
 
-    private AudioSource _oneShotAudio;
-    public void PlayOneShot(AudioClip clip, float volScale = 1f)
+    private readonly List<AudioSource> _oneShotAudio = new ();
+    public void PlayOneShot(AudioClip clip, float pitch = 1f)
     {
-        if (_oneShotAudio == null)
+        var oneShotAudio = _oneShotAudio.Find(source => source.isPlaying == false);
+        if (oneShotAudio == null)
         {
-            _oneShotAudio = (new GameObject()).AddComponent<AudioSource>();
-            GameObject.DontDestroyOnLoad(_oneShotAudio);
-            _oneShotAudio.outputAudioMixerGroup = _audioMixer.FindMatchingGroups("Sfx")[0];
+            oneShotAudio = (new GameObject()).AddComponent<AudioSource>();
+            DontDestroyOnLoad(oneShotAudio);
+            oneShotAudio.outputAudioMixerGroup = _audioMixer.FindMatchingGroups("Sfx")[0];
+            _oneShotAudio.Add(oneShotAudio);
         }
-        
-        _oneShotAudio.PlayOneShot(clip, volScale);
+
+        oneShotAudio.pitch = pitch;
+        oneShotAudio.PlayOneShot(clip, 1f);
     }
 }
