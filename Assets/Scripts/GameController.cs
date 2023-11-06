@@ -65,6 +65,13 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
 
     private void Start()
     {
+        soundSystem.PlayMusicClip(soundtrack);
+        
+        StartGameplay();
+    }
+
+    private void StartGameplay()
+    {
         _currentPointIndex = 0;
         marker.gameObject.transform.position = pathRenderer.GetPointPosition(_currentPointIndex);
         

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e5975bdcb7d0444086220018bc0dc91, type: 3}
   m_Name: SoundSystem
   m_EditorClassIdentifier: 
-  _audioMixer: {fileID: 0}
-  VolumeVariableName: 
+  _audioMixer: {fileID: 24100000, guid: 091d0d401067aa64b9df65b2c7727686, type: 2}
+  VolumeVariableName: Volume
