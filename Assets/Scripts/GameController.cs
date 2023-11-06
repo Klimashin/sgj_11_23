@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
     [SerializeField] private CanvasGroup startGameAnimation;
     [SerializeField] private CanvasGroup endGameAnimation;
     [SerializeField] private AudioClip collectSfx;
+    [SerializeField] private AudioClip badBallSfx;
     [SerializeField] private float pitchCooldown = 0.4f;
     [SerializeField] private float pitchStep = 0.2f;
     [SerializeField] private float maxPitch = 2f;
@@ -40,10 +41,9 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
     public PathRenderer PathRenderer => pathRenderer;
     public SoundSystem SoundSystem => soundSystem;
 
-    public CardScriptableObject GetRandomCardOfType(ScoreType type)
+    public CardScriptableObject GetRandomCardOfType()
     {
-        var selection = allCards.Where(c => c.type == type);
-        return selection.RandomElement();
+        return allCards.RandomElement();
     }
 
     public Tag GetRandomTagByScoreType(ScoreType scoreType)
@@ -96,8 +96,14 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
         
         eventsDispatcher.Register<CardApplyEvent>(this, OnCardApplied);
         eventsDispatcher.Register<PlayCollectSfxEvent>(this, OnPlayCollectSfxEvent);
+        eventsDispatcher.Register<PlayBadBallSfxEvent>(this, OnPlayBadBallSfxEvent);
 
         _gameplayStarted = true;
+    }
+
+    private void OnPlayBadBallSfxEvent(PlayBadBallSfxEvent obj)
+    {
+        soundSystem.PlayOneShot(badBallSfx);
     }
 
     private void OnPlayCollectSfxEvent(PlayCollectSfxEvent e)
@@ -132,10 +138,11 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
     private void GenerateInitialCards()
     {
         List<Card> cards = new List<Card>();
+        List<ScoreType> typesSelection = new List<ScoreType> {ScoreType.Red, ScoreType.Green, ScoreType.Blue};
         for (int i = 0; i < initialCardsCount; i++)
         {
             var cardSo = initialCardsSet.RandomElement();
-            cards.Add(new Card(cardSo));
+            cards.Add(new Card(cardSo, typesSelection.RandomElement()));
         }
         
         cardsUI.Initialize(cards);

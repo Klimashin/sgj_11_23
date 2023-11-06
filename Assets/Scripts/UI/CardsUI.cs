@@ -30,7 +30,7 @@ namespace UI
 
         private void OnCardAdded(AddCardEvent addEvent)
         {
-            var card = new Card(GameController.Instance.GetRandomCardOfType(addEvent.scoreType));
+            var card = new Card(GameController.Instance.GetRandomCardOfType(), addEvent.scoreType);
             var uiCard = Instantiate(uiCardPrefab, cardsTransform);
             uiCard.SetCard(card);
         }

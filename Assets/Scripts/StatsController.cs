@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,7 +37,7 @@ public class StatsController : MonoBehaviour, IEventsDispatcherClient
         _allCollectedTags.Add(cardApplyEvent.card.GetTag());
         _unusedCollectedTags.Add(cardApplyEvent.card.GetTag());
         
-        GameController.Instance.eventsDispatcher.Dispatch(new ShowAchievementEvent(cardApplyEvent.card.Name));
+        GameController.Instance.eventsDispatcher.Dispatch(new ShowComboEvent(1, cardApplyEvent.card.ScoreType,cardApplyEvent.card.Name));
         
         CheckForAchievements();
         
@@ -52,7 +53,24 @@ public class StatsController : MonoBehaviour, IEventsDispatcherClient
         _lastAppliedScoreType = cardApplyEvent.card.ScoreType;
         if (_comboCounter >= 2)
         {
-            GameController.Instance.eventsDispatcher.Dispatch(new ShowComboEvent(_comboCounter, _lastAppliedScoreType));
+            string comboText = String.Empty;
+            
+            switch (_lastAppliedScoreType)
+            {
+                case ScoreType.Red:
+                    comboText = $"Стиль комбо x{_comboCounter.ToString()}!";
+                    break;
+            
+                case ScoreType.Green:
+                    comboText = $"Нарратив комбо x{_comboCounter.ToString()}";
+                    break;
+            
+                case ScoreType.Blue:
+                    comboText = $"Механики комбо x{_comboCounter.ToString()}";
+                    break;
+            }
+            
+            GameController.Instance.eventsDispatcher.Dispatch(new ShowComboEvent(_comboCounter, _lastAppliedScoreType, comboText));
         }
     }
 
@@ -84,7 +102,7 @@ public class StatsController : MonoBehaviour, IEventsDispatcherClient
                 }
                 
                 _collectedAchievements.Add(achievement);
-                GameController.Instance.eventsDispatcher.Dispatch(new ShowComboEvent(_comboCounter, _lastAppliedScoreType));
+                GameController.Instance.eventsDispatcher.Dispatch(new ShowAchievementEvent(achievement.Name));
 
                 _unusedCollectedTags = availableTags;
             }

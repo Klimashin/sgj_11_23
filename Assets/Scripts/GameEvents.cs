@@ -55,11 +55,13 @@ public record ShowComboEvent : IDispatcherEvent
 {
     public readonly int comboCounter;
     public readonly ScoreType scoreType;
+    public readonly string comboText;
 
-    public ShowComboEvent(int comboCounter, ScoreType scoreType)
+    public ShowComboEvent(int comboCounter, ScoreType scoreType, string comboText)
     {
         this.comboCounter = comboCounter;
         this.scoreType = scoreType;
+        this.comboText = comboText;
     }
 }
 
@@ -84,3 +86,5 @@ public record ShowNegativeTagEvent : IDispatcherEvent
 }
 
 public record PlayCollectSfxEvent : IDispatcherEvent;
+
+public record PlayBadBallSfxEvent : IDispatcherEvent;

@@ -17,10 +17,7 @@ public class Collectable : MonoBehaviour
     {
         Collider2D.enabled = false;
 
-        if (scoreType != ScoreType.Negative)
-        {
-            GameController.Instance.eventsDispatcher.Dispatch(new PlayCollectSfxEvent());
-        }
+        GameController.Instance.eventsDispatcher.Dispatch(scoreType != ScoreType.Negative ? new PlayCollectSfxEvent() : new PlayBadBallSfxEvent());
         
         transform
             .DOScale(Vector3.zero, SCALE_DURATION)

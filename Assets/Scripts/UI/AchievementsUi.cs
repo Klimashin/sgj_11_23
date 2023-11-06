@@ -36,12 +36,12 @@ public class AchievementsUi : MonoBehaviour, IEventsDispatcherClient
         }
 
         var notiData = _notificationsQueue.Dequeue();
+        _isPlayingAnimation = true;
         ShowNotification(notiData.Item1, notiData.Item2).Forget();
     }
 
     private async UniTaskVoid ShowNotification(string text, bool isNegative)
     {
-        _isPlayingAnimation = true;
         var panel = isNegative ? negativeTraitPanel : achievementPanel;
         var textUi = isNegative ? negativeTraitText : achievementText;
 
