@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
     public readonly EventsDispatcher eventsDispatcher = new ();
 
     public PathRenderer PathRenderer => pathRenderer;
+    public SoundSystem SoundSystem => soundSystem;
 
     public CardScriptableObject GetRandomCardOfType(ScoreType type)
     {

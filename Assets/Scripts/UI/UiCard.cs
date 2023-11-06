@@ -30,12 +30,14 @@ namespace UI
             _intitialPos = transform.position;
             raycastTarget.raycastTarget = false;
             GameController.Instance.eventsDispatcher.Dispatch(new CardDragStarted(_card.PathSegment));
-            AudioSource.PlayClipAtPoint(sfx.RandomElement(), Vector3.zero);
+            GameController.Instance.SoundSystem.PlayOneShot(sfx.RandomElement());
+            GetComponent<LayoutElement>().ignoreLayout = true;
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            AudioSource.PlayClipAtPoint(sfx.RandomElement(), Vector3.zero, 1f);
+            GameController.Instance.SoundSystem.PlayOneShot(sfx.RandomElement());
+            GetComponent<LayoutElement>().ignoreLayout = false;
             
             raycastTarget.raycastTarget = true;
             

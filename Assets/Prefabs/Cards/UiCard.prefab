@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 3219079915304818369}
   - component: {fileID: 6265476384231987173}
   - component: {fileID: 1845640673826338054}
+  - component: {fileID: 8858991648676433066}
   m_Layer: 5
   m_Name: UiCard
   m_TagString: Untagged
@@ -210,6 +211,26 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4ba2b93608080e047a9d15b6b6dcd5a6, type: 3}
   - {fileID: 8300000, guid: 0677758e5cdd69a40bf7389288dc5533, type: 3}
   - {fileID: 8300000, guid: ed1975b1b915aa940a78a2f104c8ff1e, type: 3}
+--- !u!114 &8858991648676433066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417612570592305288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &4688076939165590103
 GameObject:
   m_ObjectHideFlags: 0
