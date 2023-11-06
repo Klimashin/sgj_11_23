@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UI;
 using UnityEngine;
 
@@ -17,7 +18,8 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
     [SerializeField] private AudioClip soundtrack;
 
     private int _currentPointIndex;
-    private bool _initialized;
+    private bool _gameplayStarted;
+    private float _endGameCountdown = 2f;
 
     public static GameController Instance { get; private set; }
 
@@ -68,7 +70,7 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
     {
         soundSystem.PlayMusicClip(soundtrack);
         
-        StartGameplay();
+        StartGameRoutine().Forget();
     }
 
     private void StartGameplay()
@@ -82,7 +84,7 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
         
         eventsDispatcher.Register<CardApplyEvent>(this, OnCardApplied);
 
-        _initialized = true;
+        _gameplayStarted = true;
     }
 
     private void OnCardApplied(CardApplyEvent cardApplyEvent)
@@ -107,12 +109,46 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
 
     private void Update()
     {
-        if (!_initialized || _currentPointIndex >= pathRenderer.LastPointIndex)
+        if (!_gameplayStarted)
         {
             return;
         }
 
+        if (_endGameCountdown <= 0f)
+        {
+            EndGameRoutine().Forget();
+            enabled = false;
+            return;
+        }
+
+        if (_currentPointIndex >= pathRenderer.LastPointIndex)
+        {
+            if (cardsUI.CurrentCardsCount == 0)
+            {
+                _endGameCountdown -= Time.deltaTime;
+            }
+            
+            return;
+        }
+
+        _endGameCountdown = 2f;
         MoveMarker(marker.Speed * Time.deltaTime);
+    }
+    
+    private async UniTaskVoid StartGameRoutine()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(1f));
+        
+        StartGameplay();
+    }
+
+    private async UniTaskVoid EndGameRoutine()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(1f));
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 
     private void MoveMarker(float moveDistance)

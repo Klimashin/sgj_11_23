@@ -12,6 +12,8 @@ namespace UI
         private readonly CompositeDisposable _compositeDisposable = new ();
         private readonly List<UiCard> _uiCards;
 
+        public int CurrentCardsCount => cardsTransform.childCount;
+
         private void Start()
         {
             GameController.Instance.eventsDispatcher.Register<AddCardEvent>(this, OnCardAdded);
