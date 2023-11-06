@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour, IEventsDispatcherClient
 {
@@ -17,6 +19,9 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
     [SerializeField] private CategoriesSettings categoriesSettings;
     [SerializeField] private SoundSystem soundSystem;
     [SerializeField] private AudioClip soundtrack;
+    [SerializeField] private Button startGameButton;
+    [SerializeField] private CanvasGroup startGameAnimation;
+    [SerializeField] private CanvasGroup endGameAnimation;
 
     private int _currentPointIndex;
     private bool _gameplayStarted;
@@ -71,21 +76,27 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
     {
         soundSystem.PlayMusicClip(soundtrack);
         
-        StartGameRoutine().Forget();
+        startGameButton.onClick.AddListener(() => StartGameRoutine().Forget());
+        
+        GetComponent<CollectablesGenerator>().Initialize();
     }
 
     private void StartGameplay()
     {
         _currentPointIndex = 0;
         marker.gameObject.transform.position = pathRenderer.GetPointPosition(_currentPointIndex);
-        
-        GetComponent<CollectablesGenerator>().Initialize();
 
         GenerateInitialCards();
         
         eventsDispatcher.Register<CardApplyEvent>(this, OnCardApplied);
+        eventsDispatcher.Register<AddScoreEvent>(this, OnAddScore);
 
         _gameplayStarted = true;
+    }
+
+    private void OnAddScore(AddScoreEvent obj)
+    {
+        throw new NotImplementedException();
     }
 
     private void OnCardApplied(CardApplyEvent cardApplyEvent)
@@ -138,7 +149,12 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
     
     private async UniTaskVoid StartGameRoutine()
     {
+        startGameButton.interactable = false;
+        startGameAnimation.DOFade(0f, 0.5f);
+        
         await UniTask.Delay(TimeSpan.FromSeconds(1f));
+        
+        startGameAnimation.gameObject.SetActive(false);
         
         StartGameplay();
     }
