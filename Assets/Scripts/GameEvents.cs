@@ -65,11 +65,11 @@ public record ShowComboEvent : IDispatcherEvent
 
 public record ShowAchievementEvent : IDispatcherEvent
 {
-    public readonly Achievement achievement;
+    public readonly string text;
 
-    public ShowAchievementEvent(Achievement achievement)
+    public ShowAchievementEvent(string text)
     {
-        this.achievement = achievement;
+        this.text = text;
     }
 }
 

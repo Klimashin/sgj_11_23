@@ -25,6 +25,7 @@ public class StatsController : MonoBehaviour, IEventsDispatcherClient
         var negativeTag = GameController.Instance.GetRandomTagByScoreType(ScoreType.Negative);
         _allCollectedTags.Add(negativeTag);
         _unusedCollectedTags.Add(negativeTag);
+        GameController.Instance.eventsDispatcher.Dispatch(new ShowNegativeTagEvent(negativeTag));
         CheckForAchievements();
     }
 
@@ -34,6 +35,9 @@ public class StatsController : MonoBehaviour, IEventsDispatcherClient
     {
         _allCollectedTags.Add(cardApplyEvent.card.GetTag());
         _unusedCollectedTags.Add(cardApplyEvent.card.GetTag());
+        
+        GameController.Instance.eventsDispatcher.Dispatch(new ShowAchievementEvent(cardApplyEvent.card.Name));
+        
         CheckForAchievements();
         
         if (cardApplyEvent.card.ScoreType == _lastAppliedScoreType)

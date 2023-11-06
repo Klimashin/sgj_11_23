@@ -41,17 +41,23 @@ public class AchievementsUi : MonoBehaviour, IEventsDispatcherClient
 
     private async UniTaskVoid ShowNotification(string text, bool isNegative)
     {
+        _isPlayingAnimation = true;
         var panel = isNegative ? negativeTraitPanel : achievementPanel;
         var textUi = isNegative ? negativeTraitText : achievementText;
+
+        textUi.text = text;
+
+        var scaleSequence = DOTween.Sequence();
+        panel.alpha = 1f;
+        panel.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        scaleSequence.Append(panel.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.2f));
+        scaleSequence.Append(panel.transform.DOScale(Vector3.one, 0.1f));
         
-        panel.alpha = 0f;
-        var fadeInTween = panel.GetComponent<CanvasGroup>().DOFade(1f, transitionTime);
-        while (fadeInTween.IsPlaying())
+        while (scaleSequence.IsPlaying())
         {
             await UniTask.DelayFrame(1, cancellationToken: destroyCancellationToken);
         }
 
-        panel.transform.DOPunchScale(new Vector3(1.1f, 1.1f, 1.1f), 0.2f, 1);
         await UniTask.Delay(TimeSpan.FromSeconds(displayTime), cancellationToken: destroyCancellationToken);
         
         var fadeOutTween = panel.GetComponent<CanvasGroup>().DOFade(0f, transitionTime);
@@ -65,12 +71,12 @@ public class AchievementsUi : MonoBehaviour, IEventsDispatcherClient
 
     private void OnShowNegativeTag(ShowNegativeTagEvent showNegativeTagEvent)
     {
-        
+        _notificationsQueue.Enqueue(new (showNegativeTagEvent.tag.Name, true));
     }
 
     private void OnShowAchievement(ShowAchievementEvent showAchievementEvent)
     {
-        throw new System.NotImplementedException();
+        _notificationsQueue.Enqueue(new (showAchievementEvent.text, false));
     }
 
     private void OnDestroy()
