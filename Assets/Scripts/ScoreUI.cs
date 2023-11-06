@@ -59,8 +59,7 @@ public class ScoreUI : MonoBehaviour, IEventsDispatcherClient
                 return;
             }
             
-            GameController.Instance.eventsDispatcher.Dispatch(new AddTagEvent(transform.position));
-            GameController.Instance.eventsDispatcher.Dispatch(new AddCardEvent(scoreType, transform.position));
+            GameController.Instance.eventsDispatcher.Dispatch(new AddCardEvent(scoreType));
             Console.WriteLine(e);
             return;
         }
@@ -69,8 +68,7 @@ public class ScoreUI : MonoBehaviour, IEventsDispatcherClient
         {
             scorePointImages[i].color = _currentScore > i ? pointActiveColor : pointInactiveColor;
         }
-
-        GameController.Instance.eventsDispatcher.Dispatch(new AddTagEvent(transform.position));
-        GameController.Instance.eventsDispatcher.Dispatch(new AddCardEvent(scoreType, transform.position));
+        
+        GameController.Instance.eventsDispatcher.Dispatch(new AddCardEvent(scoreType));
     }
 }

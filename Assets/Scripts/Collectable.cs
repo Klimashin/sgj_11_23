@@ -27,7 +27,7 @@ public class Collectable : MonoBehaviour
                 }
                 else
                 {
-                    GameController.Instance.eventsDispatcher.Dispatch(new AddTraitEvent(ScoreType.Negative));
+                    GameController.Instance.eventsDispatcher.Dispatch(new AddNegativeTraitEvent());
                 }
             });
     }

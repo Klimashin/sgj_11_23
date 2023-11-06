@@ -1,12 +1,11 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
 public class Tag : ScriptableObject
 {
     [SerializeField] private string tagName;
-    [SerializeField] private List<string> metaTags;
+    [SerializeField] private ScoreType type;
 
     public string Name => tagName;
-    public List<string> MetaTags => metaTags;
+    public ScoreType Type => type;
 }

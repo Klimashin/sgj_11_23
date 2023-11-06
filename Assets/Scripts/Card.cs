@@ -3,6 +3,7 @@ using UnityEngine;
 public class Card
 {
     private readonly CardScriptableObject _scriptableObject;
+    private readonly Tag _tag;
 
     public Sprite UiSprite => _scriptableObject.uiSprite;
     public LineRenderer PathSegment => _scriptableObject.pathSegment;
@@ -12,6 +13,9 @@ public class Card
     public Card(CardScriptableObject scriptableObject)
     {
         _scriptableObject = scriptableObject;
-        Name = GameController.Instance.GetRandomTagByScoreType(ScoreType).Name;
+        _tag = GameController.Instance.GetRandomTagByScoreType(ScoreType);
+        Name = _tag.Name;
     }
+
+    public Tag GetTag() => _tag;
 }

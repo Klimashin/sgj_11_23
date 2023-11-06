@@ -13,36 +13,16 @@ public record AddScoreEvent : IDispatcherEvent
     }
 }
 
-public record AddTraitEvent : IDispatcherEvent
-{
-    public readonly ScoreType scoreType;
-
-    public AddTraitEvent(ScoreType scoreType)
-    {
-        this.scoreType = scoreType;
-    }
-}
+public record AddNegativeTraitEvent : IDispatcherEvent;
 
 public record GameResetEvent : IDispatcherEvent;
 
-public record AddTagEvent : IDispatcherEvent
-{
-    public readonly Vector3 position;
-
-    public AddTagEvent(Vector3 pos)
-    {
-        position = pos;
-    }
-}
-
 public record AddCardEvent : IDispatcherEvent
 {
-    public readonly Vector3 position;
     public readonly ScoreType scoreType;
 
-    public AddCardEvent(ScoreType scoreType, Vector3 sourcePos)
+    public AddCardEvent(ScoreType scoreType)
     {
-        position = sourcePos;
         this.scoreType = scoreType;
     }
 }

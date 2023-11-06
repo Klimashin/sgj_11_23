@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: "\u0411\u0438\u043B\u0434 2 \u0433\u0438\u0433\u0430\u0431\u0430\u0439\u0442\u0430"
   m_EditorClassIdentifier: 
   tagName: "\u0411\u0438\u043B\u0434 2 \u0433\u0438\u0433\u0430\u0431\u0430\u0439\u0442\u0430"
-  metaTags: []
+  type: 3

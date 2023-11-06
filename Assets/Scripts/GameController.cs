@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
     [SerializeField] private int initialCardsCount = 6;
     [SerializeField] private List<CardScriptableObject> allCards;
     [SerializeField] private CategoriesSettings categoriesSettings;
+    [SerializeField] private SoundSystem soundSystem;
+    [SerializeField] private AudioClip soundtrack;
 
     private int _currentPointIndex;
     private bool _initialized;
