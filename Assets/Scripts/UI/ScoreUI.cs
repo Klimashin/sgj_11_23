@@ -49,8 +49,9 @@ public class ScoreUI : MonoBehaviour, IEventsDispatcherClient
         try
         {
             _currentScore = 0;
-            
-            await UniTask.WaitForSeconds(1f, true, cancellationToken: cancellationToken);
+            var cancellationSource =
+                CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, destroyCancellationToken);
+            await UniTask.WaitForSeconds(1f, true, cancellationToken: cancellationSource.Token);
         }
         catch (Exception e)
         {

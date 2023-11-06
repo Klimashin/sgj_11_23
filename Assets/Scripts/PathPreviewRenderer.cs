@@ -20,7 +20,7 @@ public class PathPreviewRenderer : MonoBehaviour, IEventsDispatcherClient
 
     private void OnCardDragStarted(CardDragStarted cardDragStarted)
     {
-        var currentPathLastPointIndex = GameController.Instance.PathRenderer.LastPointIndex;
+        var currentPathLastPointIndex = GameController.Instance.PathRenderer.LastPlannedPointIndex;
         var currentPathLastPoint = GameController.Instance.PathRenderer.GetPointPosition(currentPathLastPointIndex);
         var segmentToPreview = cardDragStarted.segmentLineRenderer;
 

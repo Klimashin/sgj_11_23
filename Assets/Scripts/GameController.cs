@@ -4,6 +4,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour, IEventsDispatcherClient
 {
@@ -121,7 +122,7 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
             return;
         }
 
-        if (_currentPointIndex >= pathRenderer.LastPointIndex)
+        if (_currentPointIndex >= pathRenderer.LastPlannedPointIndex)
         {
             if (cardsUI.CurrentCardsCount == 0)
             {
@@ -146,9 +147,7 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
     {
         await UniTask.Delay(TimeSpan.FromSeconds(1f));
 
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 
     private void MoveMarker(float moveDistance)
@@ -176,7 +175,7 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
         marker.transform.position = targetPosition;
         moveDistance -= distance;
         _currentPointIndex++;
-        if (_currentPointIndex >= pathRenderer.LastPointIndex)
+        if (_currentPointIndex >= pathRenderer.LastPlannedPointIndex)
         {
             return;
         }

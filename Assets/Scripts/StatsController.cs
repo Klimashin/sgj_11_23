@@ -4,9 +4,6 @@ using UnityEngine;
 public class StatsController : MonoBehaviour, IEventsDispatcherClient
 {
     [SerializeField] private List<Achievement> achievements;
-    
-    private GameController _gameController;
-    private GameController GameController => _gameController ??= GetComponent<GameController>();
 
     private readonly List<Tag> _allCollectedTags = new ();
     private readonly List<Achievement> _collectedAchievements = new ();
@@ -19,8 +16,8 @@ public class StatsController : MonoBehaviour, IEventsDispatcherClient
 
     private void Start()
     {
-        GameController.eventsDispatcher.Register<CardApplyEvent>(this, OnCardApplied);
-        GameController.eventsDispatcher.Register<AddNegativeTraitEvent>(this, OnNegativeTraitAdded);
+        GameController.Instance.eventsDispatcher.Register<CardApplyEvent>(this, OnCardApplied);
+        GameController.Instance.eventsDispatcher.Register<AddNegativeTraitEvent>(this, OnNegativeTraitAdded);
     }
 
     private void OnNegativeTraitAdded(AddNegativeTraitEvent obj)
@@ -51,7 +48,7 @@ public class StatsController : MonoBehaviour, IEventsDispatcherClient
         _lastAppliedScoreType = cardApplyEvent.card.ScoreType;
         if (_comboCounter >= 2)
         {
-            GameController.eventsDispatcher.Dispatch(new ShowComboEvent(_comboCounter, _lastAppliedScoreType));
+            GameController.Instance.eventsDispatcher.Dispatch(new ShowComboEvent(_comboCounter, _lastAppliedScoreType));
         }
     }
 
@@ -83,6 +80,7 @@ public class StatsController : MonoBehaviour, IEventsDispatcherClient
                 }
                 
                 _collectedAchievements.Add(achievement);
+                GameController.Instance.eventsDispatcher.Dispatch(new ShowComboEvent(_comboCounter, _lastAppliedScoreType));
 
                 _unusedCollectedTags = availableTags;
             }
@@ -91,8 +89,8 @@ public class StatsController : MonoBehaviour, IEventsDispatcherClient
     
     private void OnDestroy()
     {
-        GameController.eventsDispatcher.Unregister<CardApplyEvent>(this);
-        GameController.eventsDispatcher.Unregister<AddNegativeTraitEvent>(this);
+        GameController.Instance.eventsDispatcher.Unregister<CardApplyEvent>(this);
+        GameController.Instance.eventsDispatcher.Unregister<AddNegativeTraitEvent>(this);
     }
 }
 

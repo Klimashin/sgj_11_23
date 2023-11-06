@@ -62,3 +62,23 @@ public record ShowComboEvent : IDispatcherEvent
         this.scoreType = scoreType;
     }
 }
+
+public record ShowAchievementEvent : IDispatcherEvent
+{
+    public readonly Achievement achievement;
+
+    public ShowAchievementEvent(Achievement achievement)
+    {
+        this.achievement = achievement;
+    }
+}
+
+public record ShowNegativeTagEvent : IDispatcherEvent
+{
+    public readonly Tag tag;
+
+    public ShowNegativeTagEvent(Tag tag)
+    {
+        this.tag = tag;
+    }
+}
