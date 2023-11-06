@@ -29,6 +29,7 @@ public class StatsController : MonoBehaviour, IEventsDispatcherClient
         }
 
         _lastAppliedScoreType = cardApplyEvent.card.ScoreType;
-        GameController.eventsDispatcher.Dispatch(new ShowComboEvent(_comboCounter, _lastAppliedScoreType));
+        if (_comboCounter >= 2)
+            GameController.eventsDispatcher.Dispatch(new ShowComboEvent(_comboCounter, _lastAppliedScoreType));
     }
 }

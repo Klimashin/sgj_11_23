@@ -646,39 +646,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.655, y: -0.825}
-      - {x: 0.745, y: -0.825}
-      - {x: 0.79499996, y: -0.775}
-      - {x: 0.79499996, y: -0.745}
-      - {x: 0.745, y: -0.585}
-      - {x: 0.66499996, y: -0.435}
-      - {x: 0.53499997, y: -0.225}
-      - {x: 0.515, y: -0.155}
-      - {x: 0.225, y: 0.405}
-      - {x: 0.225, y: 0.42499998}
-      - {x: 0.145, y: 0.59499997}
-      - {x: 0.024999999, y: 0.84499997}
-      - {x: -0.065, y: 0.84499997}
-      - {x: -0.095, y: 0.835}
-      - {x: -0.145, y: 0.705}
-      - {x: -0.225, y: 0.505}
-      - {x: -0.295, y: 0.345}
-      - {x: -0.45499998, y: -0.065}
-      - {x: -0.515, y: -0.175}
-      - {x: -0.53499997, y: -0.255}
-      - {x: -0.715, y: -0.635}
-      - {x: -0.73499995, y: -0.73499995}
-      - {x: -0.73499995, y: -0.805}
-      - {x: -0.705, y: -0.84499997}
-      - {x: -0.555, y: -0.835}
-      - {x: -0.355, y: -0.775}
-      - {x: -0.125, y: -0.715}
-      - {x: -0.095, y: -0.755}
-      - {x: 0.005, y: -0.84499997}
-      - {x: 0.065, y: -0.84499997}
-      - {x: 0.175, y: -0.715}
-      - {x: 0.24499999, y: -0.745}
-      - {x: 0.355, y: -0.755}
+    - - {x: 0.73662007, y: -0.76215094}
+      - {x: -0.017486267, y: 0.8475699}
+      - {x: -0.7184072, y: -0.7784361}
   m_UseDelaunayMesh: 0
 --- !u!1 &590467049
 GameObject:
@@ -1085,6 +1055,7 @@ GameObject:
   - component: {fileID: 1212863608}
   - component: {fileID: 1212863607}
   - component: {fileID: 1212863610}
+  - component: {fileID: 1212863611}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -1200,6 +1171,102 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!82 &1212863611
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212863606}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c6bf9d2c023d4b543955a63cded25f8f, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1280260364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,8 +1522,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.2802075, g: 0.25711998, b: 0.509434, a: 0.84313726}
-      key1: {r: 0.2802075, g: 0.25711998, b: 0.509434, a: 1}
+      key0: {r: 0.41748106, g: 0.18272197, b: 0.88699996, a: 1}
+      key1: {r: 0.41568628, g: 0.18431373, b: 0.8862745, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

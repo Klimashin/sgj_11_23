@@ -14,20 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Red:
     Tags:
-    - "\u0417\u043E\u043C\u0431\u0438"
-    - "\u041F\u043E\u0441\u0442\u0430\u043F\u043E\u043A\u0430\u043B\u0438\u043F\u0441\u0438\u0441"
-    - "\u0411\u043E\u0441\u0441 \u043F\u0430\u0443\u043A"
-    - "\u041A\u0430\u0440\u0430\u0432\u0430\u043D\u044B"
+    - {fileID: 11400000, guid: d023889e3649fa443b1928d88730b77d, type: 2}
+    - {fileID: 11400000, guid: 23de5d2482eabc34fa4b7a8ba9fd25dc, type: 2}
+    - {fileID: 11400000, guid: fee3392c1266d294bb92b2b4820d6c03, type: 2}
   Green:
     Tags:
-    - "\u0413\u043B\u0430\u0432\u043D\u044B\u0439 \u0433\u0435\u0440\u043E\u0439
-      \u043A\u043E\u0442"
-    - "\u041D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u043A\u043E\u043D\u0446\u043E\u0432\u043E\u043A"
-    - "\u0421\u0435\u0440\u0430\u044F \u043C\u043E\u0440\u0430\u043B\u044C"
+    - {fileID: 11400000, guid: 27b335662bb6f324cb2fa08d2a577eb8, type: 2}
+    - {fileID: 11400000, guid: 3551e959ce9d8c749a717c0c7e52b20f, type: 2}
+    - {fileID: 11400000, guid: 701105b41119d9c4fa5800e99e47d3ef, type: 2}
   Blue:
     Tags:
-    - "\u041F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0438\u043D\u0433"
-    - "\u0411\u0435\u0441\u043A\u043E\u043D\u0435\u0447\u043D\u044B\u0439 \u0440\u0435\u0436\u0438\u043C"
-    - "\u041F\u0430\u0440\u043A\u0443\u0440"
+    - {fileID: 11400000, guid: 2d9f9470c8d59764b98c62b8093e0e18, type: 2}
+    - {fileID: 11400000, guid: 6c0b4c6e3275705418a3bb2d8f0eba51, type: 2}
+    - {fileID: 11400000, guid: 013046f5443c590459f74a5dd7af10c5, type: 2}
   Negative:
-    Tags: []
+    Tags:
+    - {fileID: 11400000, guid: 589d9382ef2a18c40bf70a4c6914b389, type: 2}
+    - {fileID: 11400000, guid: 9658a36789fdc5b4c988e6d8adc7500b, type: 2}
+    - {fileID: 11400000, guid: 8f72caffa09306947a48e7b1fe87959e, type: 2}

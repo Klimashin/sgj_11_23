@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour, IEventsDispatcherClient
         return selection.RandomElement();
     }
 
-    public string GetRandomTagByScoreType(ScoreType scoreType)
+    public Tag GetRandomTagByScoreType(ScoreType scoreType)
     {
         switch (scoreType)
         {

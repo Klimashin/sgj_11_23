@@ -14,5 +14,5 @@ public class CategoriesSettings : ScriptableObject
 [Serializable]
 public class CategorySettings
 {
-    public List<string> Tags;
+    public List<Tag> Tags;
 }

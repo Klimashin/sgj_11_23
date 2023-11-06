@@ -12,6 +12,6 @@ public class Card
     public Card(CardScriptableObject scriptableObject)
     {
         _scriptableObject = scriptableObject;
-        Name = GameController.Instance.GetRandomTagByScoreType(ScoreType);
+        Name = GameController.Instance.GetRandomTagByScoreType(ScoreType).Name;
     }
 }

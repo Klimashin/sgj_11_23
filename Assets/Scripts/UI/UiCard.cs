@@ -12,6 +12,7 @@ namespace UI
         [SerializeField] private Image raycastTarget;
         [SerializeField] private TextMeshProUGUI cardTitle;
         [SerializeField] private Sprite[] bgSprites;
+        [SerializeField] private List<AudioClip> sfx;
 
         private Card _card;
         private Vector3 _intitialPos;
@@ -29,10 +30,13 @@ namespace UI
             _intitialPos = transform.position;
             raycastTarget.raycastTarget = false;
             GameController.Instance.eventsDispatcher.Dispatch(new CardDragStarted(_card.PathSegment));
+            AudioSource.PlayClipAtPoint(sfx.RandomElement(), Vector3.zero);
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            AudioSource.PlayClipAtPoint(sfx.RandomElement(), Vector3.zero, 1f);
+            
             raycastTarget.raycastTarget = true;
             
             GameController.Instance.eventsDispatcher.Dispatch(new CardDragEnded());
